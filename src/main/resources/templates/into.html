@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="idInput">
+    <input type="text" class="userName" placeholder="userName">
+</div>
+<div class="idInput">
+    <input type="text" class="nickName" placeholder="nickName">
+</div>
+<button class="button" type="button" onclick="buttonProtocol()">이동</button>
+</body>
+<script>
+
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    const URL = 'http://localhost:8080'
+
+    function protocol(url, method, data, successCallBack, failedCallBack)
+    {
+        if (method === 'post') {
+            axios.post(URL + url, data,
+                (response) => {
+                    console.log(1);
+                    successCallBack(response.data);
+                },
+                (err) => {
+                    console.log(2);
+                    failedCallBack(err);
+                }
+            )
+                .catch(err => {
+                    console.log(3);
+                    console.log(err);
+                    failedCallBack(err)
+                });
+        }
+        if (method === 'get') {
+            axios.get(URL + url,
+                (response) => {
+                    console.log(1);
+                    successCallBack(response.data);
+                },
+                (err) => {
+                    console.log(2);
+                    failedCallBack(err);
+                }
+            )
+                .catch(err => {
+                    console.log(3);
+                    console.log(err);
+                    failedCallBack(err)
+                });
+        }
+    }
+</script>
+<script>
+    let userName = document.querySelector('.userName').value;
+    let nickName = document.querySelector('.nickName').value;
+    const user = {}
+    user.userName = userName;
+    user.nickName = nickName;
+
+    function buttonProtocol() {
+        protocol('/into', 'post', user,
+            (response) => {
+                console.log(response);
+            },
+            (err) => {
+                console.log(err)
+            });
+    }
+</script>
+</html>
