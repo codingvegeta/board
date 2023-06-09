@@ -5,6 +5,8 @@ import hello.board.user.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.Session;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,12 +29,14 @@ public class Controller {
     }
 
     @PostMapping("/into")
-    public String postInto(@RequestBody @Valid UserDTO userDTO, HttpSession session) {
+    public String postInto(@RequestBody @Validated UserDTO userDTO, BindingResult result) {
         log.info("post into");
         User user = new User();
         user.setUserName(userDTO.getUserName());
         user.setNickName(userDTO.getNickName());
-        session.setAttribute("user", user);
+        if (result.hasErrors()) {
+            return "/hello";
+        }
         return "/hello";
     }
 }
