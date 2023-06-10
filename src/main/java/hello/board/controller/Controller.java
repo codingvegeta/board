@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -29,14 +30,17 @@ public class Controller {
     }
 
     @PostMapping("/into")
-    public String postInto(@RequestBody @Validated UserDTO userDTO, BindingResult result) {
+    @ResponseBody
+    public Object postInto(@RequestBody @Validated UserDTO userDTO, BindingResult result) {
         log.info("post into");
         User user = new User();
         user.setUserName(userDTO.getUserName());
         user.setNickName(userDTO.getNickName());
+
         if (result.hasErrors()) {
-            return "/hello";
+            return result.getAllErrors();
         }
+
         return "/hello";
     }
 }

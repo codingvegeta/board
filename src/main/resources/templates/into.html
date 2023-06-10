@@ -11,67 +11,29 @@
 <div class="idInput">
     <input type="text" class="nickName" placeholder="nickName">
 </div>
-<button class="button" type="button" onclick="buttonProtocol()">이동</button>
+<div style="border:1px solid; padding:5px;" class="box" onclick="buttonProtocol()">클릭</div>
+
 </body>
 <script>
 
 </script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/common.js"></script>
 <script>
-    const URL = 'http://localhost:8080'
-
-    function protocol(url, method, data, successCallBack, failedCallBack)
-    {
-        if (method === 'post') {
-            axios.post(URL + url, data,
-                (response) => {
-                    console.log(1);
-                    successCallBack(response.data);
-                },
-                (err) => {
-                    console.log(2);
-                    failedCallBack(err);
-                }
-            )
-                .catch(err => {
-                    console.log(3);
-                    console.log(err);
-                    failedCallBack(err)
-                });
-        }
-        if (method === 'get') {
-            axios.get(URL + url,
-                (response) => {
-                    console.log(1);
-                    successCallBack(response.data);
-                },
-                (err) => {
-                    console.log(2);
-                    failedCallBack(err);
-                }
-            )
-                .catch(err => {
-                    console.log(3);
-                    console.log(err);
-                    failedCallBack(err)
-                });
-        }
-    }
-</script>
-<script>
-    let userName = document.querySelector('.userName').value;
-    let nickName = document.querySelector('.nickName').value;
     const user = {}
-    user.userName = userName;
-    user.nickName = nickName;
-
     function buttonProtocol() {
-        protocol('/into', 'post', user,
+        let userName = document.querySelector('.userName').value;
+        let nickName = document.querySelector('.nickName').value;
+
+        user.userName = userName;
+        user.nickName = nickName;
+        console.log('함수 내부 ', user);
+        postProtocol('/into', user,
             (response) => {
-                console.log(response);
+                console.log('이것은 응답입니다 ', response);
             },
             (err) => {
-                console.log(err)
+                console.log('이것은 에러입니다.', err);
             });
     }
 </script>

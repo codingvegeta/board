@@ -10,8 +10,8 @@ import javax.validation.constraints.Size;
 
 @Data
 public class UserDTO {
+
     @Min(value = 3,message = "최소 3글자 이상 작성해주세요")
-    @Size(min = 5)
     @NotNull
     private String userName;
 
