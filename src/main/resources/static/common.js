@@ -3,9 +3,14 @@ const URL = 'http://localhost:8080'
 function postProtocol(url, data, successCallBack, failedCallBack) {
     axios.post(URL + url, data)
         .then(response => {
-            console.log(1);
             console.log(response);
-            successCallBack(response.data);
+            if (response.data.success) {
+                console.log(1);
+                successCallBack(response.data);
+            } else {
+                console.log(2);
+                failedCallBack(response.data);
+            }
         })
         .catch(err => {
             console.log(3);

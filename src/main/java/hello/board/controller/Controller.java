@@ -1,7 +1,9 @@
 package hello.board.controller;
 
+import hello.board.response.Response;
 import hello.board.user.User;
 import hello.board.user.UserDTO;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.Session;
 import org.springframework.ui.Model;
@@ -38,7 +40,7 @@ public class Controller {
         user.setNickName(userDTO.getNickName());
 
         if (result.hasErrors()) {
-            return result.getAllErrors();
+            return Response.of(false, result.getAllErrors());
         }
 
         return "/hello";

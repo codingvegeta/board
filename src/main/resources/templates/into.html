@@ -29,12 +29,14 @@
         user.nickName = nickName;
         console.log('함수 내부 ', user);
         postProtocol('/into', user,
-            (response) => {
-                console.log('이것은 응답입니다 ', response);
-            },
-            (err) => {
+            (response => {
+                console.log('이것은 응답입니다.', response);
+                alert(`${response.data[0].field} 는 ${response.data[0].defaultMessage}`)
+            }),
+            (err=> {
                 console.log('이것은 에러입니다.', err);
-            });
+            })
+            );
     }
 </script>
 </html>
