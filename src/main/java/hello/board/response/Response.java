@@ -22,6 +22,13 @@ public class Response<T> {
         this.data = data;
     }
 
+    public Response(boolean success,String message, T data) {
+        this.success = success;
+        this.code = 200;
+        this.message = message;
+        this.data = data;
+    }
+
     public Response(T data) {
         this.success = true;
         this.code = 200;
