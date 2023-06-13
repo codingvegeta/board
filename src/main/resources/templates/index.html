@@ -5,7 +5,8 @@
     <title>Hi Index!</title>
 </head>
 <body>
-<h1>Hello! {}this is Index!</h1>
+<h1>Hello <span th:text="${user.nickName}"></span>!</h1>
+<h1 th:text="${user.nickName}"></h1>
 <a href="">이동하기</a>
 </body>
 </html>

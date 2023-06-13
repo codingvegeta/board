@@ -5,6 +5,7 @@
     <title>Hello</title>
 </head>
 <body>
-<h1>|Hello ${user.nickName} !|</h1>
+<h1>Hello <span th:text="${user.nickName}"></span>!</h1>
+<h1 th:text="${user.nickName}"></h1>
 </body>
 </html>

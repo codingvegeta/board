@@ -9,7 +9,7 @@
     <input type="text" class="userName" placeholder="userName">
 </div>
 <div class="idInput">
-    <input type="text" class="nickName" placeholder="nickName">
+    <input type="text" class="nickName" placeholder="nickName" onkeyup="doEnter(event)">
 </div>
 <div style="border:1px solid; padding:5px;" class="box" onclick="buttonProtocol()">클릭</div>
 
@@ -18,9 +18,9 @@
 
 </script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!--<script src="/common.js"></script>-->
-<script src="/jquerry.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/common.js"></script>
+<!--<script src="/jquerry.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
 <script>
     const user = {}
     function buttonProtocol() {
@@ -30,22 +30,22 @@
         user.userName = userName;
         user.nickName = nickName;
         console.log('함수 내부 ', user);
-        $.ajax({
-            type: 'post',
-            url: '/into',
-            contentType : "application/json",
-            data: user,
-            success: function (result) {
-                console.log(result);
-                // successCallBack(result);
-            },
-            error: function (request, status, err) {
-                console.log(request);
-                console.log(status);
-                console.log(err);
-                // failedCallBack(err);
-            },
-        })
+        postProtocol('/into', user,
+            (response => {
+                console.log('이것은 응답입니다.', response);
+                location.href = response.data;
+            }),
+            (err=> {
+                alert(`${err.data[0].field} 는 ${err.data[0].defaultMessage}`)
+                console.log('이것은 에러입니다.', err);
+            })
+            );
+    }
+
+    function doEnter(event){
+        if (event.keyCode == 13) {
+            buttonProtocol();
+        }
     }
 </script>
 </html>
