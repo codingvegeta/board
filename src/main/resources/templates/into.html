@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+<div onclick="b()">
+    <span>새로운 박스</span>
+</div>
 <div class="idInput">
     <input type="text" class="userName" placeholder="userName">
 </div>
@@ -12,7 +15,9 @@
     <input type="text" class="nickName" placeholder="nickName" onkeyup="doEnter(event)">
 </div>
 <div style="border:1px solid; padding:5px;" class="box" onclick="buttonProtocol()">클릭</div>
-
+<div onclick="a()">
+    <span>눌러보세요 ㅋㅋ</span>
+</div>
 </body>
 <script>
 
@@ -39,7 +44,37 @@
                 alert(`${err.data[0].field} 는 ${err.data[0].defaultMessage}`)
                 console.log('이것은 에러입니다.', err);
             })
-            );
+        );
+    }
+
+    function a() {
+        console.log('a');
+        console.log(event.target);
+    }
+
+    function b() {
+        console.log('b');
+        console.log(event.target);
+        a();
+    }
+
+    const saveLocalStorage = ()=>{
+        localStorage.setItem("hello", "world");
+    }
+
+    let asd = null;
+    const loadLocalStorage = ()=>{
+        let d = localStorage.getItem("hello");
+        asd = localStorage.getItem("hello");
+
+        console.log(d);
+    }
+
+    const removeLocalStorage = ()=>{
+        localStorage.removeItem("hello");
+
+        console.log(asd);
+        console.log(localStorage.getItem('hello'));
     }
 
     function doEnter(event){
