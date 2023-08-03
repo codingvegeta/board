@@ -62,10 +62,21 @@
         localStorage.setItem("hello", "world");
     }
 
+    const saveSessionStorage = ()=>{
+        sessionStorage.setItem("hello", "hi");
+    }
+
     let asd = null;
     const loadLocalStorage = ()=>{
         let d = localStorage.getItem("hello");
         asd = localStorage.getItem("hello");
+
+        console.log(d);
+    }
+
+    const loadSessionStorage = ()=>{
+        let d = sessionStorage.getItem("hello");
+        asd = sessionStorage.getItem("hello");
 
         console.log(d);
     }
@@ -75,6 +86,13 @@
 
         console.log(asd);
         console.log(localStorage.getItem('hello'));
+    }
+
+    const removeSessionStorage = ()=>{
+        sessionStorage.removeItem("hello");
+
+        console.log(asd);
+        console.log(sessionStorage.getItem('hello'));
     }
 
     function doEnter(event){
