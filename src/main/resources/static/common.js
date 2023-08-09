@@ -36,3 +36,17 @@ function getProtocol(url, successCallBack, failedCallBack) {
             failedCallBack(err)
         });
 }
+
+async function returnProtocol(url, data) {
+    let response = new Object();
+    try {
+        data = axios.post(url, data);
+        if (response.result) {
+            return response.data;
+        } else {
+            console.log(response.msg);
+        }
+    } catch (e){
+        console.log(e);
+    }
+}
